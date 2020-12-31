@@ -11,10 +11,15 @@ fi
 # Path to your oh-my-zsh installation.
 export CODAC_ROOT=/opt/codac-6.2
 export ZSH="/home/codac-dev/.oh-my-zsh"
-export PATH="/usr/bin/ccache:${PATH}"
+# source /opt/rh/devtoolset-6/enable-custom
+export PATH="/home/codac-dev/.local/bin:/usr/bin/ccache:${PATH}"
 export LD_LIBRARY_PATH="{LD_LIBRARY_PATH}:/opt/rh/httpd24/root/lib64"
 export EPICS_PVA_ADDR_LIST=10.0.2.255 
 export EPICS_CA_ADDR_LIST=10.0.2.255 
+
+# set Vim as pager
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+# export PAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -26,9 +31,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Changing "ls" to "exa"
 # Uncomment alias l* into /home/codac-dev/.oh-my-zsh/lib/directories.zsh
 # Uncomment DISABLE_LS_COLORS="true"
-alias ls='exa -l --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
+alias ls='exa --icons --color=always --group-directories-first' # my preferred listing
+alias la='exa --icons -la --color=always --group-directories-first'  # all files and dirs
+alias ll='exa --icons -l --color=always --group-directories-first'  # long format
 # alias lt='exa -T --color=always --group-directories-first' # tree listing
 
 # Set list of themes to pick from when loading at random
@@ -89,21 +94,27 @@ DISABLE_LS_COLORS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions
+plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   git
   dirhistory
   fasd
-  zsh-syntax-highlighting
 )
-EDITOR=vim
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
+
+export EDITOR=vim
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+# Edit line in vim with ctrl-x-e
+bindkey '^x^e' edit-command-line
+bindkey '\ee' edit-command-line
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -138,3 +149,6 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Created by `userpath` on 2020-12-16 07:36:51
+export PATH="$PATH:/home/codac-dev/.local/bin"
