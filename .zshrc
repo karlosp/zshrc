@@ -107,15 +107,17 @@ export EDITOR=vim
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+# help for exa and fd
+compdef _gnu_generic exa fd
 # Edit line in vim with ctrl-x-e
 bindkey '^x^e' edit-command-line
 bindkey '\ee' edit-command-line
-
+                                     
 export MANPATH="/usr/local/man:$MANPATH"
-
+                                     
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
+export LANG=en_US.UTF-8              
+                                     
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
